@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <link rel="stylesheet" href="panel.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bx-grid-alt icon'></i>
+            <div class="logo_name">Menu</div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <a class="active" href="|">
+                    <i class='bx bx-group'></i>
+                    <span class="links_name">Usuarios</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-user-pin'></i>
+                    <span class="links_name">Estudiantes</span>
+                </a>
+                <span class="tooltip">Estudiantes</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-credit-card'></i>
+                    <span class="links_name">Tarjetas</span>
+                </a>
+                <span class="tooltip">Tarjetas</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="links_name">Registros</span>
+                </a>
+                <span class="tooltip">Registros</span>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="profile.jpg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">Chuo</div>
+                        <div class="job">Administrador</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <div class="text">Usuarios</div>
+        <div class="table-container">
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Correo Electrónico</th>
+                        <th>Contraseña</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>admin@ejemplo.com</td>
+                        <td>••••••••</td>
+                        <td>Juan</td>
+                        <td>Pérez</td>
+                        <td>
+                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>maria.garcia@ejemplo.com</td>
+                        <td>••••••••</td>
+                        <td>María</td>
+                        <td>García</td>
+                        <td>
+                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>carlos.lopez@ejemplo.com</td>
+                        <td>••••••••</td>
+                        <td>Carlos</td>
+                        <td>López</td>
+                        <td>
+                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>ana.martinez@ejemplo.com</td>
+                        <td>••••••••</td>
+                        <td>Ana</td>
+                        <td>Martínez</td>
+                        <td>
+                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>luis.rodriguez@ejemplo.com</td>
+                        <td>••••••••</td>
+                        <td>Luis</td>
+                        <td>Rodríguez</td>
+                        <td>
+                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>sofia.hernandez@ejemplo.com</td>
+                        <td>••••••••</td>
+                        <td>Sofía</td>
+                        <td>Hernández</td>
+                        <td>
+                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+
+</html>
