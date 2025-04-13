@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="es" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Panel - Lista</title>
+    <link rel="stylesheet" href="panel.css">
+    <link rel="stylesheet" href="panel_lista.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-button">
+        <i class='bx bx-menu'></i> Menu
+    </button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-overlay"></div>
+        <div class="mobile-menu-container">
+            <div class="mobile-menu-header">
+                <div class="logo_name">Menu</div>
+                <button class="mobile-menu-close">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <ul class="mobile-menu-items">
+                <li>
+                    <a class="active" href="panel.html">
+                        <i class='bx bx-group'></i>
+                        <span>Usuarios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="estudiantes.html">
+                        <i class='bx bx-user-pin'></i>
+                        <span>Estudiantes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="tarjetas.html">
+                        <i class='bx bx-credit-card'></i>
+                        <span>Tarjetas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="registros.html">
+                        <i class='bx bx-book-alt'></i>
+                        <span>Registros</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="mobile-menu-footer">
+                <div class="mobile-user-info">
+                    <img src="profile.jpg" alt="profileImg">
+                    <div class="mobile-user-details">
+                        <div class="mobile-user-name">Chuo</div>
+                        <div class="mobile-user-role">Administrador</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bx-grid-alt icon'></i>
+            <div class="logo_name">Menu</div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <a class="active" href="panel.html">
+                    <i class='bx bx-group'></i>
+                    <span class="links_name">Usuarios</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
+            </li>
+            <li>
+                <a href="estudiantes.html">
+                    <i class='bx bx-user-pin'></i>
+                    <span class="links_name">Estudiantes</span>
+                </a>
+                <span class="tooltip">Estudiantes</span>
+            </li>
+            <li>
+                <a href="tarjetas.html">
+                    <i class='bx bx-credit-card'></i>
+                    <span class="links_name">Tarjetas</span>
+                </a>
+                <span class="tooltip">Tarjetas</span>
+            </li>
+            <li>
+                <a href="registros.html">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="links_name">Registros</span>
+                </a>
+                <span class="tooltip">Registros</span>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="profile.jpg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">Chuo</div>
+                        <div class="job">Administrador</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <div class="text">Usuarios - Estilo Lista</div>
+        
+        <div class="list-container">
+            <div class="list-header">
+                <div class="search-container">
+                    <input type="text" placeholder="Buscar usuario..." class="search-input">
+                    <button class="search-button"><i class='bx bx-search'></i></button>
+                </div>
+            </div>
+            
+            <ul class="user-list">
+                <li class="user-item">
+                    <div class="user-info">
+                        <div class="user-main">
+                            <span class="user-name">Juan Pérez</span>
+                            <span class="user-email">admin@ejemplo.com</span>
+                        </div>
+                        <div class="user-meta">
+                            <span class="user-id">ID: 1</span>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="list-action-btn"><i class='bx bx-pencil'></i></button>
+                        <button class="list-action-btn expand-btn"><i class='bx bx-chevron-down'></i></button>
+                    </div>
+                    <div class="user-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Contraseña:</span>
+                            <span class="detail-value">••••••••</span>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="user-item">
+                    <div class="user-info">
+                        <div class="user-main">
+                            <span class="user-name">María García</span>
+                            <span class="user-email">maria.garcia@ejemplo.com</span>
+                        </div>
+                        <div class="user-meta">
+                            <span class="user-id">ID: 2</span>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="list-action-btn"><i class='bx bx-pencil'></i></button>
+                        <button class="list-action-btn expand-btn"><i class='bx bx-chevron-down'></i></button>
+                    </div>
+                    <div class="user-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Contraseña:</span>
+                            <span class="detail-value">••••••••</span>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="user-item">
+                    <div class="user-info">
+                        <div class="user-main">
+                            <span class="user-name">Carlos López</span>
+                            <span class="user-email">carlos.lopez@ejemplo.com</span>
+                        </div>
+                        <div class="user-meta">
+                            <span class="user-id">ID: 3</span>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="list-action-btn"><i class='bx bx-pencil'></i></button>
+                        <button class="list-action-btn expand-btn"><i class='bx bx-chevron-down'></i></button>
+                    </div>
+                    <div class="user-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Contraseña:</span>
+                            <span class="detail-value">••••••••</span>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="user-item">
+                    <div class="user-info">
+                        <div class="user-main">
+                            <span class="user-name">Ana Martínez</span>
+                            <span class="user-email">ana.martinez@ejemplo.com</span>
+                        </div>
+                        <div class="user-meta">
+                            <span class="user-id">ID: 4</span>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="list-action-btn"><i class='bx bx-pencil'></i></button>
+                        <button class="list-action-btn expand-btn"><i class='bx bx-chevron-down'></i></button>
+                    </div>
+                    <div class="user-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Contraseña:</span>
+                            <span class="detail-value">••••••••</span>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="user-item">
+                    <div class="user-info">
+                        <div class="user-main">
+                            <span class="user-name">Luis Rodríguez</span>
+                            <span class="user-email">luis.rodriguez@ejemplo.com</span>
+                        </div>
+                        <div class="user-meta">
+                            <span class="user-id">ID: 5</span>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="list-action-btn"><i class='bx bx-pencil'></i></button>
+                        <button class="list-action-btn expand-btn"><i class='bx bx-chevron-down'></i></button>
+                    </div>
+                    <div class="user-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Contraseña:</span>
+                            <span class="detail-value">••••••••</span>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="user-item">
+                    <div class="user-info">
+                        <div class="user-main">
+                            <span class="user-name">Sofía Hernández</span>
+                            <span class="user-email">sofia.hernandez@ejemplo.com</span>
+                        </div>
+                        <div class="user-meta">
+                            <span class="user-id">ID: 6</span>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="list-action-btn"><i class='bx bx-pencil'></i></button>
+                        <button class="list-action-btn expand-btn"><i class='bx bx-chevron-down'></i></button>
+                    </div>
+                    <div class="user-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Contraseña:</span>
+                            <span class="detail-value">••••••••</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <script src="menu.js"></script>
+    <script>
+        // Expandir/contraer detalles de usuario
+        document.querySelectorAll('.expand-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const userItem = this.closest('.user-item');
+                userItem.classList.toggle('expanded');
+                
+                // Cambiar icono
+                if (userItem.classList.contains('expanded')) {
+                    this.innerHTML = '<i class="bx bx-chevron-up"></i>';
+                } else {
+                    this.innerHTML = '<i class="bx bx-chevron-down"></i>';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Menu</title>
+    <title>Registros</title>
     <link rel="stylesheet" href="panel.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -29,7 +29,7 @@
             </div>
             <ul class="mobile-menu-items">
                 <li>
-                    <a class="active" href="panel.html">
+                    <a href="panel.html">
                         <i class='bx bx-group'></i>
                         <span>Usuarios</span>
                     </a>
@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="registros.html">
+                    <a class="active" href="registros.html">
                         <i class='bx bx-book-alt'></i>
                         <span>Registros</span>
                     </a>
@@ -74,7 +74,7 @@
         </div>
         <ul class="nav-list">
             <li>
-                <a class="active" href="panel.html">
+                <a href="panel.html">
                     <i class='bx bx-group'></i>
                     <span class="links_name">Usuarios</span>
                 </a>
@@ -95,7 +95,7 @@
                 <span class="tooltip">Tarjetas</span>
             </li>
             <li>
-                <a href="registros.html">
+                <a class="active" href="registros.html">
                     <i class='bx bx-book-alt'></i>
                     <span class="links_name">Registros</span>
                 </a>
@@ -113,84 +113,73 @@
         </ul>
     </div>
     <section class="home-section">
-        <div class="text">Usuarios</div>
+        <div class="text">Registros</div>
         <div class="table-container">
             <table class="user-table">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Correo Electrónico</th>
-                        <th>Contraseña</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Acciones</th>
+                        <th>Estudiante</th>
+                        <th>Tarjeta</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Tipo</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>admin@ejemplo.com</td>
-                        <td>••••••••</td>
-                        <td>Juan</td>
-                        <td>Pérez</td>
-                        <td>
-                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
-                        </td>
+                        <td>Carlos Rodríguez</td>
+                        <td>T-001-2023</td>
+                        <td>15/04/2023</td>
+                        <td>08:15:22</td>
+                        <td>Entrada</td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>maria.garcia@ejemplo.com</td>
-                        <td>••••••••</td>
-                        <td>María</td>
-                        <td>García</td>
-                        <td>
-                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
-                        </td>
+                        <td>Carlos Rodríguez</td>
+                        <td>T-001-2023</td>
+                        <td>15/04/2023</td>
+                        <td>14:30:45</td>
+                        <td>Salida</td>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td>carlos.lopez@ejemplo.com</td>
-                        <td>••••••••</td>
-                        <td>Carlos</td>
-                        <td>López</td>
-                        <td>
-                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
-                        </td>
+                        <td>María González</td>
+                        <td>T-002-2023</td>
+                        <td>15/04/2023</td>
+                        <td>09:05:12</td>
+                        <td>Entrada</td>
                     </tr>
                     <tr>
                         <td>4</td>
-                        <td>ana.martinez@ejemplo.com</td>
-                        <td>••••••••</td>
-                        <td>Ana</td>
-                        <td>Martínez</td>
-                        <td>
-                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
-                        </td>
+                        <td>María González</td>
+                        <td>T-002-2023</td>
+                        <td>15/04/2023</td>
+                        <td>15:45:33</td>
+                        <td>Salida</td>
                     </tr>
                     <tr>
                         <td>5</td>
-                        <td>luis.rodriguez@ejemplo.com</td>
-                        <td>••••••••</td>
-                        <td>Luis</td>
-                        <td>Rodríguez</td>
-                        <td>
-                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
-                        </td>
+                        <td>José Pérez</td>
+                        <td>T-003-2023</td>
+                        <td>15/04/2023</td>
+                        <td>08:45:18</td>
+                        <td>Entrada</td>
                     </tr>
                     <tr>
                         <td>6</td>
-                        <td>sofia.hernandez@ejemplo.com</td>
-                        <td>••••••••</td>
-                        <td>Sofía</td>
-                        <td>Hernández</td>
-                        <td>
-                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
-                        </td>
+                        <td>José Pérez</td>
+                        <td>T-003-2023</td>
+                        <td>15/04/2023</td>
+                        <td>16:20:05</td>
+                        <td>Salida</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </section>
+
     <script src="menu.js"></script>
 </body>
 
