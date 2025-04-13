@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Si el deslizamiento es principalmente horizontal (para evitar conflictos con el scroll)
         if (verticalSwipe < maxVerticalSwipe) {
-            // Deslizamiento de izquierda a derecha para abrir el menú
-            if (horizontalSwipe > minHorizontalSwipe && !isMenuOpen && touchStartX < 50) {
+            // Deslizamiento de izquierda a derecha para abrir el menú desde cualquier parte de la pantalla
+            if (horizontalSwipe > minHorizontalSwipe && !isMenuOpen) {
                 openMenu();
             }
             
