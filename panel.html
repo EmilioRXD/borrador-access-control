@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
-<html lang="en" dir="ltr">
+<html lang="es" dir="ltr">
 
 <head>
     <meta charset="UTF-8">
-    <title>Menu</title>
+    <title>Panel - Usuarios</title>
     <link rel="stylesheet" href="panel.css">
+    <link rel="stylesheet" href="panel_acordeon.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -111,84 +112,252 @@
     </div>
     <section class="home-section">
         <div class="text">Usuarios</div>
-        <div class="table-container">
-            <table class="user-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Correo Electrónico</th>
-                        <th>Contraseña</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>admin@ejemplo.com</td>
-                        <td>••••••••</td>
-                        <td>Juan</td>
-                        <td>Pérez</td>
-                        <td>
-                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>maria.garcia@ejemplo.com</td>
-                        <td>••••••••</td>
-                        <td>María</td>
-                        <td>García</td>
-                        <td>
-                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>carlos.lopez@ejemplo.com</td>
-                        <td>••••••••</td>
-                        <td>Carlos</td>
-                        <td>López</td>
-                        <td>
-                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>ana.martinez@ejemplo.com</td>
-                        <td>••••••••</td>
-                        <td>Ana</td>
-                        <td>Martínez</td>
-                        <td>
-                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>luis.rodriguez@ejemplo.com</td>
-                        <td>••••••••</td>
-                        <td>Luis</td>
-                        <td>Rodríguez</td>
-                        <td>
-                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>sofia.hernandez@ejemplo.com</td>
-                        <td>••••••••</td>
-                        <td>Sofía</td>
-                        <td>Hernández</td>
-                        <td>
-                            <button class="action-btn">Editar <i class="bx bx-pencil"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+        <div class="accordion-container">
+            <div class="accordion-filters">
+                <button class="filter-button active">Todos</button>
+                <button class="filter-button">Administradores</button>
+                <button class="filter-button">Usuarios</button>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="user-name">Juan Pérez</span>
+                        </div>
+                        <div class="accordion-actions">
+                            <button class="accordion-edit-btn"><i class='bx bx-pencil'></i></button>
+                            <button class="accordion-toggle"><i class='bx bx-chevron-down'></i></button>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="user-data-grid">
+                            <div class="user-data-item">
+                                <div class="data-label">Correo:</div>
+                                <div class="data-value">admin@ejemplo.com</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Contraseña:</div>
+                                <div class="data-value">••••••••</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Nombre:</div>
+                                <div class="data-value">Juan</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Apellido:</div>
+                                <div class="data-value">Pérez</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="user-name">María García</span>
+                        </div>
+                        <div class="accordion-actions">
+                            <button class="accordion-edit-btn"><i class='bx bx-pencil'></i></button>
+                            <button class="accordion-toggle"><i class='bx bx-chevron-down'></i></button>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="user-data-grid">
+                            <div class="user-data-item">
+                                <div class="data-label">Correo:</div>
+                                <div class="data-value">maria.garcia@ejemplo.com</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Contraseña:</div>
+                                <div class="data-value">••••••••</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Nombre:</div>
+                                <div class="data-value">María</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Apellido:</div>
+                                <div class="data-value">García</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="user-name">Carlos López</span>
+                        </div>
+                        <div class="accordion-actions">
+                            <button class="accordion-edit-btn"><i class='bx bx-pencil'></i></button>
+                            <button class="accordion-toggle"><i class='bx bx-chevron-down'></i></button>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="user-data-grid">
+                            <div class="user-data-item">
+                                <div class="data-label">Correo:</div>
+                                <div class="data-value">carlos.lopez@ejemplo.com</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Contraseña:</div>
+                                <div class="data-value">••••••••</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Nombre:</div>
+                                <div class="data-value">Carlos</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Apellido:</div>
+                                <div class="data-value">López</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="user-name">Ana Martínez</span>
+                        </div>
+                        <div class="accordion-actions">
+                            <button class="accordion-edit-btn"><i class='bx bx-pencil'></i></button>
+                            <button class="accordion-toggle"><i class='bx bx-chevron-down'></i></button>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="user-data-grid">
+                            <div class="user-data-item">
+                                <div class="data-label">Correo:</div>
+                                <div class="data-value">ana.martinez@ejemplo.com</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Contraseña:</div>
+                                <div class="data-value">••••••••</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Nombre:</div>
+                                <div class="data-value">Ana</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Apellido:</div>
+                                <div class="data-value">Martínez</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="user-name">Luis Rodríguez</span>
+                        </div>
+                        <div class="accordion-actions">
+                            <button class="accordion-edit-btn"><i class='bx bx-pencil'></i></button>
+                            <button class="accordion-toggle"><i class='bx bx-chevron-down'></i></button>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="user-data-grid">
+                            <div class="user-data-item">
+                                <div class="data-label">Correo:</div>
+                                <div class="data-value">luis.rodriguez@ejemplo.com</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Contraseña:</div>
+                                <div class="data-value">••••••••</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Nombre:</div>
+                                <div class="data-value">Luis</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Apellido:</div>
+                                <div class="data-value">Rodríguez</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="user-name">Sofía Hernández</span>
+                        </div>
+                        <div class="accordion-actions">
+                            <button class="accordion-edit-btn"><i class='bx bx-pencil'></i></button>
+                            <button class="accordion-toggle"><i class='bx bx-chevron-down'></i></button>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="user-data-grid">
+                            <div class="user-data-item">
+                                <div class="data-label">Correo:</div>
+                                <div class="data-value">sofia.hernandez@ejemplo.com</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Contraseña:</div>
+                                <div class="data-value">••••••••</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Nombre:</div>
+                                <div class="data-value">Sofía</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Apellido:</div>
+                                <div class="data-value">Hernández</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+
     <script src="menu.js"></script>
+    <script>
+
+        // Acordeón
+        document.querySelectorAll('.accordion-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const accordionItem = button.closest('.accordion-item');
+
+                // Cerrar otros items
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    if (item !== accordionItem) {
+                        item.classList.remove('active');
+                        const otherContent = item.querySelector('.accordion-content');
+                        otherContent.style.maxHeight = null;
+                        item.querySelector('.accordion-toggle').innerHTML = '<i class="bx bx-chevron-down"></i>';
+                    }
+                });
+
+                // Abrir/cerrar el item actual
+                accordionItem.classList.toggle('active');
+                const content = accordionItem.querySelector('.accordion-content');
+
+                if (accordionItem.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    button.innerHTML = '<i class="bx bx-chevron-up"></i>';
+                } else {
+                    content.style.maxHeight = null;
+                    button.innerHTML = '<i class="bx bx-chevron-down"></i>';
+                }
+            });
+        });
+
+        // Filtros (solo para demostración)
+        document.querySelectorAll('.filter-button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.filter-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+            });
+        });
+    </script>
 </body>
 
 </html>
