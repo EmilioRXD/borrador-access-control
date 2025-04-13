@@ -37,11 +37,9 @@
 }
 
 .accordion-item {
-    margin-bottom: 10px;
-    border-radius: 8px;
     overflow: hidden;
     background-color: #fff;
-    border: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 .accordion-header {
@@ -87,7 +85,7 @@
     gap: 5px;
 }
 
-.accordion-edit-btn, 
+.accordion-edit-btn,
 .accordion-toggle {
     background-color: transparent;
     border: 1px solid #ddd;
@@ -102,7 +100,7 @@
     transition: all 0.3s ease;
 }
 
-.accordion-edit-btn:hover, 
+.accordion-edit-btn:hover,
 .accordion-toggle:hover {
     background-color: var(--color-text);
     color: var(--color-primary-bg);
@@ -144,7 +142,7 @@
         padding: 15px;
         margin: 15px;
     }
-    
+
     .user-data-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 10px;
@@ -156,20 +154,20 @@
         padding: 10px;
         margin: 10px;
     }
-    
+
     .accordion-header {
         padding: 12px;
     }
-    
+
     .user-data-grid {
         grid-template-columns: 1fr;
         gap: 8px;
     }
-    
+
     .accordion-filters {
         padding-bottom: 5px;
     }
-    
+
     .filter-button {
         padding: 6px 12px;
         font-size: 13px;

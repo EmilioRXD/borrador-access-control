@@ -1,62 +1,78 @@
-// Variables para el menú móvil
-const mobileMenuButton = document.querySelector('.mobile-menu-button');
-const mobileMenuContainer = document.querySelector('.mobile-menu-container');
-const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-const mobileMenuClose = document.querySelector('.mobile-menu-close');
+// Esperar a que el DOM esté completamente cargado
+document.addEventListener('DOMContentLoaded', function() {
+    // Variables para el menú móvil
+    const mobileMenuContainer = document.querySelector('.mobile-menu-container');
+    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+    const mobileMenuClose = document.querySelector('.mobile-menu-close');
 
-// Función para abrir el menú
-function openMenu() {
-    mobileMenuContainer.classList.add('open');
-    mobileMenuOverlay.classList.add('open');
-}
+    // Función para abrir el menú
+    function openMenu() {
+        mobileMenuContainer.classList.add('open');
+        mobileMenuOverlay.classList.add('open');
+        console.log('Menú abierto');
+    }
 
-// Función para cerrar el menú
-function closeMenu() {
-    mobileMenuContainer.classList.remove('open');
-    mobileMenuOverlay.classList.remove('open');
-}
+    // Función para cerrar el menú
+    function closeMenu() {
+        mobileMenuContainer.classList.remove('open');
+        mobileMenuOverlay.classList.remove('open');
+        console.log('Menú cerrado');
+    }
 
-// Eventos para botones del menú
-mobileMenuButton.addEventListener('click', openMenu);
-mobileMenuClose.addEventListener('click', closeMenu);
-mobileMenuOverlay.addEventListener('click', closeMenu);
+    // Eventos para cerrar el menú
+    if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', closeMenu);
+    }
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', closeMenu);
+    }
 
-// Sidebar toggle (menú de escritorio)
-let sidebar = document.querySelector(".sidebar");
-let closeBtn = document.querySelector("#btn");
+    // Sidebar toggle (menú de escritorio)
+    const sidebar = document.querySelector(".sidebar");
+    const closeBtn = document.querySelector("#btn");
 
-closeBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+        });
+    }
+
+    // Variables para el deslizamiento
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    const minHorizontalSwipe = 50;
+    const maxVerticalSwipe = 100;
+
+    // Agregar detector de deslizamiento para todo el documento
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].screenY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].clientX;
+        touchEndY = e.changedTouches[0].screenY;
+        
+        // Calcular distancias de deslizamiento
+        const horizontalSwipe = touchEndX - touchStartX;
+        const verticalSwipe = Math.abs(touchEndY - touchStartY);
+        
+        // Verificar si el menú está abierto
+        const isMenuOpen = mobileMenuContainer.classList.contains('open');
+        
+        // Si el deslizamiento es principalmente horizontal (para evitar conflictos con el scroll)
+        if (verticalSwipe < maxVerticalSwipe) {
+            // Deslizamiento de izquierda a derecha para abrir el menú
+            if (horizontalSwipe > minHorizontalSwipe && !isMenuOpen && touchStartX < 50) {
+                openMenu();
+            }
+            
+            // Deslizamiento de derecha a izquierda para cerrar el menú
+            if (horizontalSwipe < -minHorizontalSwipe && isMenuOpen) {
+                closeMenu();
+            }
+        }
+    }, { passive: true });
 });
-
-// Soporte para gestos de deslizamiento
-let touchStartX = 0;
-let touchEndX = 0;
-const minSwipeDistance = 50; // Distancia mínima para considerar un deslizamiento
-
-// Detectar inicio del deslizamiento
-document.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-}, false);
-
-// Detectar fin del deslizamiento
-document.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-}, false);
-
-// Manejar el deslizamiento
-function handleSwipe() {
-    // Calcular la distancia del deslizamiento
-    const swipeDistance = touchEndX - touchStartX;
-    
-    // Si el deslizamiento es de derecha a izquierda cerca del borde izquierdo
-    if (swipeDistance < -minSwipeDistance && touchStartX < 30) {
-        closeMenu();
-    }
-    
-    // Si el deslizamiento es de izquierda a derecha
-    if (swipeDistance > minSwipeDistance && touchStartX < 30) {
-        openMenu();
-    }
-}

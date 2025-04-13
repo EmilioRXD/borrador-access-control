@@ -261,20 +261,7 @@
 
 /* Mobile menu styles */
 
-.mobile-menu-button {
-    display: none;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1000;
-    background-color: var(--color-text);
-    color: var(--color-primary-bg);
-    border: none;
-    border-radius: 5px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 16px;
-}
+/* Botón de menú móvil eliminado */
 
 .mobile-menu-overlay {
     position: fixed;
@@ -287,6 +274,8 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    /* Elimina el resaltado al tocar en dispositivos móviles */
 }
 
 .mobile-menu-container {
@@ -301,6 +290,8 @@
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
     transition: left 0.3s ease;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Mejora el desplazamiento en iOS */
 }
 
 .mobile-menu-container.open {
@@ -402,15 +393,15 @@
     .sidebar li .tooltip {
         display: none;
     }
-    
+
     .home-section {
         padding-left: 78px;
     }
-    
+
     .table-container {
         overflow-x: auto;
     }
-    
+
     .user-table {
         min-width: 600px;
     }
@@ -420,15 +411,7 @@
     .sidebar {
         display: none;
     }
-    
-    .mobile-menu-button {
-        display: block;
-    }
-    
-    .mobile-menu-container.open + .mobile-menu-overlay {
-        display: block;
-    }
-    
+
     .home-section {
         padding-left: 0;
         width: 100%;
