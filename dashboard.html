@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="es" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Estadísticas</title>
+    <link rel="stylesheet" href="panel.css">
+    <link rel="stylesheet" href="panel_acordeon.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-overlay"></div>
+        <div class="mobile-menu-container">
+            <div class="mobile-menu-header">
+                <div class="logo_name">Menu</div>
+                <button class="mobile-menu-close">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <ul class="mobile-menu-items">
+                <li>
+                    <a href="usuarios.html">
+                        <i class='bx bx-group'></i>
+                        <span>Usuarios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="estudiantes.html">
+                        <i class='bx bx-user-pin'></i>
+                        <span>Estudiantes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="tarjetas.html">
+                        <i class='bx bx-credit-card'></i>
+                        <span>Tarjetas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="registros.html">
+                        <i class='bx bx-book-alt'></i>
+                        <span>Registros</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="active" href="dashboard.html">
+                        <i class='bx bx-line-chart'></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="mobile-menu-footer">
+                <div class="mobile-user-info">
+                    <img src="profile.jpg" alt="profileImg">
+                    <div class="mobile-user-details">
+                        <div class="mobile-user-name">Chuo</div>
+                        <div class="mobile-user-role">Administrador</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bx-grid-alt icon'></i>
+            <div class="logo_name">Menu</div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <a href="usuarios.html">
+                    <i class='bx bx-group'></i>
+                    <span class="links_name">Usuarios</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
+            </li>
+            <li>
+                <a href="estudiantes.html">
+                    <i class='bx bx-user-pin'></i>
+                    <span class="links_name">Estudiantes</span>
+                </a>
+                <span class="tooltip">Estudiantes</span>
+            </li>
+            <li>
+                <a href="tarjetas.html">
+                    <i class='bx bx-credit-card'></i>
+                    <span class="links_name">Tarjetas</span>
+                </a>
+                <span class="tooltip">Tarjetas</span>
+            </li>
+            <li>
+                <a href="registros.html">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="links_name">Registros</span>
+                </a>
+                <span class="tooltip">Registros</span>
+            </li>
+            <li>
+                <a class="active" href="dashboard.html">
+                    <i class='bx bx-line-chart'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="profile.jpg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">Chuo</div>
+                        <div class="job">Administrador</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <div class="header-container">
+            <div class="text">Dashboard</div>
+            <button class="menu-toggle-btn" id="menu-toggle">
+                <i class='bx bx-menu'></i>
+            </button>
+        </div>
+
+        <!-- Contenedor principal del dashboard -->
+        <div class="dashboard-container">
+            <!-- Fila superior de tarjetas de estadísticas -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon users-icon">
+                        <i class='bx bx-user'></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Usuarios</h3>
+                        <p class="stat-number">248</p>
+                        <p class="stat-change positive"><i class='bx bx-up-arrow-alt'></i> 12% este mes</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon students-icon">
+                        <i class='bx bx-user-pin'></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Estudiantes Activos</h3>
+                        <p class="stat-number">186</p>
+                        <p class="stat-change positive"><i class='bx bx-up-arrow-alt'></i> 8% este mes</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon cards-icon">
+                        <i class='bx bx-credit-card'></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Tarjetas Emitidas</h3>
+                        <p class="stat-number">215</p>
+                        <p class="stat-change positive"><i class='bx bx-up-arrow-alt'></i> 15% este mes</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon records-icon">
+                        <i class='bx bx-book-alt'></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Registros Diarios</h3>
+                        <p class="stat-number">124</p>
+                        <p class="stat-change negative"><i class='bx bx-down-arrow-alt'></i> 3% este mes</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fila de gráficos -->
+            <div class="charts-row">
+                <!-- Gráfico de usuarios por mes -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Usuarios Registrados por Mes</h3>
+                        <div class="chart-actions">
+                            <button class="chart-action-btn"><i class='bx bx-refresh'></i></button>
+                            <button class="chart-action-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="usersChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Gráfico de distribución de tipos de usuario -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Distribución de Usuarios</h3>
+                        <div class="chart-actions">
+                            <button class="chart-action-btn"><i class='bx bx-refresh'></i></button>
+                            <button class="chart-action-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="userTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fila inferior de gráficos -->
+            <div class="charts-row">
+                <!-- Gráfico de accesos por hora -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Accesos por Hora del Día</h3>
+                        <div class="chart-actions">
+                            <button class="chart-action-btn"><i class='bx bx-refresh'></i></button>
+                            <button class="chart-action-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="accessHoursChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Tabla de actividad reciente -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Actividad Reciente</h3>
+                        <div class="chart-actions">
+                            <button class="chart-action-btn"><i class='bx bx-refresh'></i></button>
+                            <button class="chart-action-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-body activity-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Acción</th>
+                                    <th>Hora</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>María García</td>
+                                    <td>Ingreso al edificio</td>
+                                    <td>Hoy, 10:45 AM</td>
+                                </tr>
+                                <tr>
+                                    <td>Juan Pérez</td>
+                                    <td>Salida del edificio</td>
+                                    <td>Hoy, 10:30 AM</td>
+                                </tr>
+                                <tr>
+                                    <td>Carlos López</td>
+                                    <td>Ingreso al edificio</td>
+                                    <td>Hoy, 09:15 AM</td>
+                                </tr>
+                                <tr>
+                                    <td>Ana Martínez</td>
+                                    <td>Ingreso al edificio</td>
+                                    <td>Hoy, 08:50 AM</td>
+                                </tr>
+                                <tr>
+                                    <td>Pedro Ramírez</td>
+                                    <td>Salida del edificio</td>
+                                    <td>Hoy, 08:45 AM</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="menu.js"></script>
+    <script>
+        // Inicializar los gráficos cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', function () {
+            // Gráfico de usuarios por mes
+            const usersCtx = document.getElementById('usersChart').getContext('2d');
+            const usersChart = new Chart(usersCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                    datasets: [{
+                        label: 'Nuevos Usuarios',
+                        data: [12, 19, 15, 17, 22, 25, 32, 38, 42, 45, 48, 52],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de distribución de tipos de usuario
+            const userTypeCtx = document.getElementById('userTypeChart').getContext('2d');
+            const userTypeChart = new Chart(userTypeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Estudiantes', 'Profesores', 'Administrativos', 'Visitantes'],
+                    datasets: [{
+                        data: [65, 15, 12, 8],
+                        backgroundColor: [
+                            '#292d6b', // Color índigo para estudiantes
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(255, 206, 86, 0.8)',
+                            'rgba(75, 192, 192, 0.8)'
+                        ],
+                        borderColor: [
+                            '#292d6b', // Color índigo para estudiantes
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de accesos por hora
+            const accessHoursCtx = document.getElementById('accessHoursChart').getContext('2d');
+            const accessHoursChart = new Chart(accessHoursCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM'],
+                    datasets: [{
+                        label: 'Cantidad de Accesos',
+                        data: [5, 15, 35, 42, 25, 30, 45, 40, 35, 30, 38, 32, 20, 10, 5],
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

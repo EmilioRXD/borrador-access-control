@@ -251,12 +251,35 @@
     transition: all 0.5s ease;
 }
 
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
 .home-section .text {
     display: inline-block;
     color: var(--color-black-text);
     font-size: 25px;
     font-weight: 500;
-    margin: 18px
+    margin: 0;
+}
+
+.menu-toggle-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-toggle-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Mobile menu styles */
@@ -281,21 +304,21 @@
 .mobile-menu-container {
     position: fixed;
     top: 0;
-    left: -300px;
+    right: -300px;
     width: 250px;
     height: 100%;
     background-color: var(--color-primary-bg);
     z-index: 999;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-    transition: left 0.3s ease;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     /* Mejora el desplazamiento en iOS */
 }
 
 .mobile-menu-container.open {
-    left: 0;
+    right: 0;
 }
 
 .mobile-menu-overlay.open {
@@ -415,6 +438,10 @@
     .home-section {
         padding-left: 0;
         width: 100%;
+    }
+
+    .menu-toggle-btn {
+        display: block;
     }
 }
 

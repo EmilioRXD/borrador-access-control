@@ -27,7 +27,7 @@
             </div>
             <ul class="mobile-menu-items">
                 <li>
-                    <a href="panel.html">
+                    <a href="usuarios.html">
                         <i class='bx bx-group'></i>
                         <span>Usuarios</span>
                     </a>
@@ -48,6 +48,12 @@
                     <a href="registros.html">
                         <i class='bx bx-book-alt'></i>
                         <span>Registros</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="dashboard.html">
+                        <i class='bx bx-line-chart'></i>
+                        <span>Dashboard</span>
                     </a>
                 </li>
             </ul>
@@ -72,7 +78,7 @@
         </div>
         <ul class="nav-list">
             <li>
-                <a href="panel.html">
+                <a href="usuarios.html">
                     <i class='bx bx-group'></i>
                     <span class="links_name">Usuarios</span>
                 </a>
@@ -98,6 +104,14 @@
                     <span class="links_name">Registros</span>
                 </a>
                 <span class="tooltip">Registros</span>
+            </li>
+            <li>
+                <a href="dashboard.html">
+                    <i class='bx bx-line-chart'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
             <li class="profile">
                 <div class="profile-details">
                     <img src="profile.jpg" alt="profileImg">
@@ -111,7 +125,12 @@
         </ul>
     </div>
     <section class="home-section">
-        <div class="text">Tarjetas</div>
+        <div class="header-container">
+            <div class="text">Tarjetas</div>
+            <button class="menu-toggle-btn" id="menu-toggle">
+                <i class='bx bx-menu'></i>
+            </button>
+        </div>
 
         <div class="accordion-container">
             <div class="accordion-filters">
@@ -127,12 +146,15 @@
                             <span class="user-name">Carlos Rodríguez</span>
                         </div>
                         <div class="accordion-actions">
-                            <div class="status-container status-active-container" title="Esta tarjeta está activa y puede ser utilizada">
+                            <div class="status-container status-active-container"
+                                title="Esta tarjeta está activa y puede ser utilizada">
                                 <span class="status-indicator status-active"></span>
                                 <span>Activa</span>
                             </div>
-                            <button class="accordion-edit-btn" title="Editar tarjeta"><i class='bx bx-pencil'></i></button>
-                            <button class="accordion-toggle" title="Ver detalles"><i class='bx bx-chevron-down'></i></button>
+                            <button class="accordion-edit-btn" title="Editar tarjeta"><i
+                                    class='bx bx-pencil'></i></button>
+                            <button class="accordion-toggle" title="Ver detalles"><i
+                                    class='bx bx-chevron-down'></i></button>
                         </div>
                     </div>
                     <div class="accordion-content">
@@ -163,12 +185,15 @@
                             <span class="user-name">María González</span>
                         </div>
                         <div class="accordion-actions">
-                            <div class="status-container status-active-container" title="Esta tarjeta está activa y puede ser utilizada">
+                            <div class="status-container status-active-container"
+                                title="Esta tarjeta está activa y puede ser utilizada">
                                 <span class="status-indicator status-active"></span>
                                 <span>Activa</span>
                             </div>
-                            <button class="accordion-edit-btn" title="Editar tarjeta"><i class='bx bx-pencil'></i></button>
-                            <button class="accordion-toggle" title="Ver detalles"><i class='bx bx-chevron-down'></i></button>
+                            <button class="accordion-edit-btn" title="Editar tarjeta"><i
+                                    class='bx bx-pencil'></i></button>
+                            <button class="accordion-toggle" title="Ver detalles"><i
+                                    class='bx bx-chevron-down'></i></button>
                         </div>
                     </div>
                     <div class="accordion-content">
@@ -199,12 +224,15 @@
                             <span class="user-name">José Pérez</span>
                         </div>
                         <div class="accordion-actions">
-                            <div class="status-container status-inactive-container" title="Esta tarjeta está inactiva y no puede ser utilizada">
+                            <div class="status-container status-inactive-container"
+                                title="Esta tarjeta está inactiva y no puede ser utilizada">
                                 <span class="status-indicator status-inactive"></span>
                                 <span>Inactiva</span>
                             </div>
-                            <button class="accordion-edit-btn" title="Editar tarjeta"><i class='bx bx-pencil'></i></button>
-                            <button class="accordion-toggle" title="Ver detalles"><i class='bx bx-chevron-down'></i></button>
+                            <button class="accordion-edit-btn" title="Editar tarjeta"><i
+                                    class='bx bx-pencil'></i></button>
+                            <button class="accordion-toggle" title="Ver detalles"><i
+                                    class='bx bx-chevron-down'></i></button>
                         </div>
                     </div>
                     <div class="accordion-content">
@@ -235,12 +263,15 @@
                             <span class="user-name">Laura Díaz</span>
                         </div>
                         <div class="accordion-actions">
-                            <div class="status-container status-active-container" title="Esta tarjeta está activa y puede ser utilizada">
+                            <div class="status-container status-active-container"
+                                title="Esta tarjeta está activa y puede ser utilizada">
                                 <span class="status-indicator status-active"></span>
                                 <span>Activa</span>
                             </div>
-                            <button class="accordion-edit-btn" title="Editar tarjeta"><i class='bx bx-pencil'></i></button>
-                            <button class="accordion-toggle" title="Ver detalles"><i class='bx bx-chevron-down'></i></button>
+                            <button class="accordion-edit-btn" title="Editar tarjeta"><i
+                                    class='bx bx-pencil'></i></button>
+                            <button class="accordion-toggle" title="Ver detalles"><i
+                                    class='bx bx-chevron-down'></i></button>
                         </div>
                     </div>
                     <div class="accordion-content">
@@ -271,12 +302,15 @@
                             <span class="user-name">Andrés Martínez</span>
                         </div>
                         <div class="accordion-actions">
-                            <div class="status-container status-active-container" title="Esta tarjeta está activa y puede ser utilizada">
+                            <div class="status-container status-active-container"
+                                title="Esta tarjeta está activa y puede ser utilizada">
                                 <span class="status-indicator status-active"></span>
                                 <span>Activa</span>
                             </div>
-                            <button class="accordion-edit-btn" title="Editar tarjeta"><i class='bx bx-pencil'></i></button>
-                            <button class="accordion-toggle" title="Ver detalles"><i class='bx bx-chevron-down'></i></button>
+                            <button class="accordion-edit-btn" title="Editar tarjeta"><i
+                                    class='bx bx-pencil'></i></button>
+                            <button class="accordion-toggle" title="Ver detalles"><i
+                                    class='bx bx-chevron-down'></i></button>
                         </div>
                     </div>
                     <div class="accordion-content">

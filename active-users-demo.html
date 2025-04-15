@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Estadísticas de Usuarios Activos</title>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --indigo-color: #292d6b;
+            --indigo-light: rgba(41, 45, 107, 0.1);
+            --indigo-medium: rgba(41, 45, 107, 0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .demo-title {
+            color: var(--indigo-color);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        /* Tarjeta principal con el color indigo */
+        .active-users-card {
+            background-color: var(--indigo-color);
+            border-radius: 12px;
+            padding: 20px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(41, 45, 107, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .active-users-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .active-users-card::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 180px;
+            height: 180px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card-icon i {
+            font-size: 22px;
+        }
+        
+        .users-count {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .users-trend {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .users-trend i {
+            margin-right: 5px;
+        }
+        
+        .card-footer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+        
+        /* Tarjetas secundarias */
+        .stat-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            border-left: 4px solid var(--indigo-color);
+        }
+        
+        .stat-card-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--indigo-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .stat-card-icon i {
+            font-size: 24px;
+            color: var(--indigo-color);
+        }
+        
+        .stat-card-info h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card-info .number {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--indigo-color);
+        }
+        
+        /* Gráficos */
+        .charts-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        
+        .chart-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .chart-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--indigo-color);
+        }
+        
+        .chart-body {
+            height: 300px;
+            position: relative;
+        }
+        
+        /* Tabla de usuarios activos */
+        .active-users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .active-users-table th {
+            background-color: var(--indigo-light);
+            color: var(--indigo-color);
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .active-users-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .active-users-table tr:hover {
+            background-color: var(--indigo-light);
+        }
+        
+        .user-status {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .status-online {
+            background-color: #4CAF50;
+        }
+        
+        .status-away {
+            background-color: #FFC107;
+        }
+        
+        .status-inactive {
+            background-color: #9e9e9e;
+        }
+        
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .user-name {
+            font-weight: 500;
+        }
+        
+        .user-role {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .user-location {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .user-activity {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-body {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1 class="demo-title">Demostración del Color #292d6b en Estadísticas de Usuarios Activos</h1>
+        
+        <div class="stats-grid">
+            <!-- Tarjeta principal con el color indigo -->
+            <div class="active-users-card">
+                <div class="card-header">
+                    <div class="card-title">Usuarios Activos</div>
+                    <div class="card-icon">
+                        <i class='bx bx-user-pin'></i>
+                    </div>
+                </div>
+                <div class="users-count">186</div>
+                <div class="users-trend">
+                    <i class='bx bx-up-arrow-alt'></i>
+                    <span>8% más que el mes pasado</span>
+                </div>
+                <div class="card-footer">
+                    <div class="stat-item">
+                        <div class="stat-value">142</div>
+                        <div class="stat-label">Estudiantes</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">28</div>
+                        <div class="stat-label">Profesores</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">16</div>
+                        <div class="stat-label">Personal</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tarjetas secundarias -->
+            <div class="stat-card">
+                <div class="stat-card-icon">
+                    <i class='bx bx-time'></i>
+                </div>
+                <div class="stat-card-info">
+                    <h3>Tiempo Promedio de Sesión</h3>
+                    <div class="number">42 min</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-card-icon">
+                    <i class='bx bx-calendar'></i>
+                </div>
+                <div class="stat-card-info">
+                    <h3>Días Activos por Semana</h3>
+                    <div class="number">4.8</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="charts-row">
+            <!-- Gráfico de actividad por hora -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <div class="chart-title">Actividad por Hora del Día</div>
+                </div>
+                <div class="chart-body">
+                    <canvas id="activityChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Gráfico de distribución de usuarios -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <div class="chart-title">Distribución de Usuarios Activos</div>
+                </div>
+                <div class="chart-body">
+                    <canvas id="distributionChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tabla de usuarios activos -->
+        <div class="chart-container" style="margin-top: 20px;">
+            <div class="chart-header">
+                <div class="chart-title">Usuarios Activos Recientemente</div>
+            </div>
+            <table class="active-users-table">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Rol</th>
+                        <th>Ubicación</th>
+                        <th>Última Actividad</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="user-status status-online"></span>
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="user-avatar">
+                            <span class="user-name">Juan Pérez</span>
+                        </td>
+                        <td class="user-role">Estudiante</td>
+                        <td class="user-location">Biblioteca</td>
+                        <td class="user-activity">Hace 5 minutos</td>
+                        <td>En línea</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="user-status status-online"></span>
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="user-avatar">
+                            <span class="user-name">María García</span>
+                        </td>
+                        <td class="user-role">Profesora</td>
+                        <td class="user-location">Aula 201</td>
+                        <td class="user-activity">Hace 12 minutos</td>
+                        <td>En línea</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="user-status status-away"></span>
+                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="User" class="user-avatar">
+                            <span class="user-name">Carlos López</span>
+                        </td>
+                        <td class="user-role">Estudiante</td>
+                        <td class="user-location">Cafetería</td>
+                        <td class="user-activity">Hace 25 minutos</td>
+                        <td>Ausente</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="user-status status-online"></span>
+                            <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="User" class="user-avatar">
+                            <span class="user-name">Ana Martínez</span>
+                        </td>
+                        <td class="user-role">Estudiante</td>
+                        <td class="user-location">Laboratorio</td>
+                        <td class="user-activity">Hace 18 minutos</td>
+                        <td>En línea</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="user-status status-inactive"></span>
+                            <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="User" class="user-avatar">
+                            <span class="user-name">Pedro Ramírez</span>
+                        </td>
+                        <td class="user-role">Administrativo</td>
+                        <td class="user-location">Oficina</td>
+                        <td class="user-activity">Hace 45 minutos</td>
+                        <td>Inactivo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gráfico de actividad por hora
+            const activityCtx = document.getElementById('activityChart').getContext('2d');
+            const activityChart = new Chart(activityCtx, {
+                type: 'line',
+                data: {
+                    labels: ['6AM', '8AM', '10AM', '12PM', '2PM', '4PM', '6PM', '8PM', '10PM'],
+                    datasets: [{
+                        label: 'Usuarios Activos',
+                        data: [15, 45, 75, 65, 85, 90, 70, 40, 20],
+                        backgroundColor: 'rgba(41, 45, 107, 0.2)',
+                        borderColor: '#292d6b',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointBackgroundColor: '#292d6b',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(200, 200, 200, 0.2)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+            
+            // Gráfico de distribución de usuarios
+            const distributionCtx = document.getElementById('distributionChart').getContext('2d');
+            const distributionChart = new Chart(distributionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Estudiantes', 'Profesores', 'Administrativos', 'Visitantes'],
+                    datasets: [{
+                        data: [142, 28, 16, 0],
+                        backgroundColor: [
+                            '#292d6b',
+                            'rgba(41, 45, 107, 0.8)',
+                            'rgba(41, 45, 107, 0.6)',
+                            'rgba(41, 45, 107, 0.4)'
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                boxWidth: 15,
+                                padding: 15,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
