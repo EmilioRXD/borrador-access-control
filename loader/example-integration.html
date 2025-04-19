@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de Integración - Loader NFC</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <style>
+        .content {
+            opacity: 0;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content.visible {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .btn {
+            background-color: var(--color-secondary);
+            color: var(--color-bg-primary);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--color-primary);
+        }
+        
+        .code-example {
+            background-color: var(--color-bg-secondary);
+            padding: 1rem;
+            border-radius: var(--border-radius-md);
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        pre {
+            margin: 0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <!-- El contenido principal que se mostrará después de la carga -->
+    <div class="content" id="mainContent">
+        <h1>Integración del Loader NFC</h1>
+        
+        <p>Esta página muestra cómo integrar la animación de carga NFC en el sistema de control de acceso.</p>
+        
+        <h2>Demostración</h2>
+        <button class="btn" id="showLoaderBtn">Mostrar Loader</button>
+        
+        <h2>Cómo implementarlo</h2>
+        <p>Para implementar el loader en la página principal, sigue estos pasos:</p>
+        
+        <h3>1. Incluye el script del loader</h3>
+        <div class="code-example">
+            <pre>&lt;script src="loader/nfc-loader.js"&gt;&lt;/script&gt;</pre>
+        </div>
+        
+        <h3>2. Muestra el loader al cargar la página</h3>
+        <div class="code-example">
+<pre>&lt;script&gt;
+document.addEventListener('DOMContentLoaded', function() {
+    // Oculta el contenido principal
+    const mainContent = document.getElementById('mainContent');
+    mainContent.style.opacity = '0';
+    
+    // Muestra el loader
+    const loader = showNfcLoader({
+        onComplete: function() {
+            // Muestra el contenido principal cuando el loader termina
+            mainContent.classList.add('visible');
+        }
+    });
+});
+&lt;/script&gt;</pre>
+        </div>
+        
+        <h3>3. Opciones de configuración</h3>
+        <p>El loader acepta las siguientes opciones:</p>
+        <ul>
+            <li><strong>container</strong>: El elemento donde se mostrará el loader (por defecto: document.body)</li>
+            <li><strong>autoHide</strong>: Si el loader debe ocultarse automáticamente (por defecto: true)</li>
+            <li><strong>loadTime</strong>: Tiempo de carga en milisegundos (por defecto: 5000)</li>
+            <li><strong>onComplete</strong>: Función a ejecutar cuando el loader termine</li>
+        </ul>
+        
+        <h2>Personalización</h2>
+        <p>Puedes personalizar la apariencia del loader modificando el archivo <code>nfc-loader.css</code>.</p>
+    </div>
+    
+    <!-- Incluir el script del loader -->
+    <script src="nfc-loader.js"></script>
+    
+    <script>
+        // Mostrar el loader al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Oculta el contenido principal
+            const mainContent = document.getElementById('mainContent');
+            
+            // Muestra el loader
+            const loader = showNfcLoader({
+                onComplete: function() {
+                    // Muestra el contenido principal cuando el loader termina
+                    mainContent.classList.add('visible');
+                }
+            });
+        });
+        
+        // Botón para mostrar el loader manualmente
+        document.getElementById('showLoaderBtn').addEventListener('click', function() {
+            showNfcLoader({
+                loadTime: 3000 // Tiempo más corto para la demostración
+            });
+        });
+    </script>
+</body>
+</html>

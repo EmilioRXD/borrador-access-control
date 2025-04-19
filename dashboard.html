@@ -5,9 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - Estadísticas</title>
-    <link rel="stylesheet" href="panel.css">
-    <link rel="stylesheet" href="panel_acordeon.css">
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="css/index.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -179,31 +177,31 @@
 
             <!-- Fila de gráficos -->
             <div class="charts-row">
-                <!-- Gráfico de usuarios por mes -->
+                <!-- Gráfico de tendencia de accesos semanales -->
                 <div class="chart-container">
                     <div class="chart-header">
-                        <h3>Usuarios Registrados por Mes</h3>
+                        <h3>Tendencia de Accesos Semanales</h3>
                         <div class="chart-actions">
                             <button class="chart-action-btn"><i class='bx bx-refresh'></i></button>
                             <button class="chart-action-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
                         </div>
                     </div>
                     <div class="chart-body">
-                        <canvas id="usersChart"></canvas>
+                        <canvas id="weeklyAccessChart"></canvas>
                     </div>
                 </div>
 
-                <!-- Gráfico de distribución de tipos de usuario -->
+                <!-- Gráfico de distribución de tipos de estudiantes -->
                 <div class="chart-container">
                     <div class="chart-header">
-                        <h3>Distribución de Usuarios</h3>
+                        <h3>Distribución por Tipo de Estudiante</h3>
                         <div class="chart-actions">
                             <button class="chart-action-btn"><i class='bx bx-refresh'></i></button>
                             <button class="chart-action-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
                         </div>
                     </div>
                     <div class="chart-body">
-                        <canvas id="userTypeChart"></canvas>
+                        <canvas id="studentTypeChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -224,52 +222,17 @@
                     </div>
                 </div>
 
-                <!-- Tabla de actividad reciente -->
+                <!-- Gráfico de distribución por carreras -->
                 <div class="chart-container">
                     <div class="chart-header">
-                        <h3>Actividad Reciente</h3>
+                        <h3>Distribución por Carreras</h3>
                         <div class="chart-actions">
                             <button class="chart-action-btn"><i class='bx bx-refresh'></i></button>
                             <button class="chart-action-btn"><i class='bx bx-dots-vertical-rounded'></i></button>
                         </div>
                     </div>
-                    <div class="chart-body activity-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Usuario</th>
-                                    <th>Acción</th>
-                                    <th>Hora</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>María García</td>
-                                    <td>Ingreso al edificio</td>
-                                    <td>Hoy, 10:45 AM</td>
-                                </tr>
-                                <tr>
-                                    <td>Juan Pérez</td>
-                                    <td>Salida del edificio</td>
-                                    <td>Hoy, 10:30 AM</td>
-                                </tr>
-                                <tr>
-                                    <td>Carlos López</td>
-                                    <td>Ingreso al edificio</td>
-                                    <td>Hoy, 09:15 AM</td>
-                                </tr>
-                                <tr>
-                                    <td>Ana Martínez</td>
-                                    <td>Ingreso al edificio</td>
-                                    <td>Hoy, 08:50 AM</td>
-                                </tr>
-                                <tr>
-                                    <td>Pedro Ramírez</td>
-                                    <td>Salida del edificio</td>
-                                    <td>Hoy, 08:45 AM</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="chart-body">
+                        <canvas id="careerDistributionChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -282,15 +245,15 @@
     <script>
         // Inicializar los gráficos cuando el DOM esté cargado
         document.addEventListener('DOMContentLoaded', function () {
-            // Gráfico de accesos diarios
-            const usersCtx = document.getElementById('usersChart').getContext('2d');
-            const usersChart = new Chart(usersCtx, {
+            // Gráfico de tendencia de accesos semanales
+            const weeklyAccessCtx = document.getElementById('weeklyAccessChart').getContext('2d');
+            const weeklyAccessChart = new Chart(weeklyAccessCtx, {
                 type: 'line',
                 data: {
-                    labels: ['7:00', '7:30', '8:00', '8:30', '9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'],
+                    labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
                     datasets: [{
-                        label: 'Entradas',
-                        data: [5, 45, 12, 3, 35, 8, 2, 30, 5, 2, 40, 10, 3, 38, 6, 2, 25, 4, 1, 15, 3, 1, 10, 2, 0],
+                        label: 'Semana Actual',
+                        data: [320, 345, 375, 390, 310, 150],
                         backgroundColor: 'rgba(52, 152, 219, 0.2)',
                         borderColor: '#3498db',
                         borderWidth: 3,
@@ -302,8 +265,8 @@
                         pointBorderWidth: 0,
                         fill: true
                     }, {
-                        label: 'Salidas',
-                        data: [0, 2, 8, 42, 5, 30, 10, 3, 28, 8, 4, 35, 12, 5, 32, 10, 3, 22, 8, 2, 12, 5, 3, 8, 15],
+                        label: 'Semana Anterior',
+                        data: [290, 325, 360, 375, 290, 125],
                         backgroundColor: 'rgba(155, 89, 182, 0.2)',
                         borderColor: '#9b59b6',
                         borderWidth: 3,
@@ -312,19 +275,6 @@
                         pointHoverRadius: 6,
                         pointBackgroundColor: '#9b59b6',
                         pointBorderColor: '#9b59b6',
-                        pointBorderWidth: 0,
-                        fill: true
-                    }, {
-                        label: 'Accesos Denegados',
-                        data: [1, 3, 1, 0, 2, 1, 0, 2, 1, 0, 3, 1, 0, 2, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
-                        backgroundColor: 'rgba(231, 76, 60, 0.2)',
-                        borderColor: '#e74c3c',
-                        borderWidth: 3,
-                        tension: 0.4,
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
-                        pointBackgroundColor: '#e74c3c',
-                        pointBorderColor: '#e74c3c',
                         pointBorderWidth: 0,
                         fill: true
                     }]
@@ -378,31 +328,35 @@
                             beginAtZero: true,
                             grid: {
                                 color: 'rgba(200, 200, 200, 0.2)'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Cantidad de Estudiantes'
                             }
                         }
                     }
                 }
             });
 
-            // Gráfico de distribución de tipos de usuario
-            const userTypeCtx = document.getElementById('userTypeChart').getContext('2d');
-            const userTypeChart = new Chart(userTypeCtx, {
+            // Gráfico de distribución de tipos de estudiantes
+            const studentTypeCtx = document.getElementById('studentTypeChart').getContext('2d');
+            const studentTypeChart = new Chart(studentTypeCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Estudiantes', 'Profesores', 'Administrativos', 'Visitantes'],
+                    labels: ['Regulares', 'Nuevo Ingreso', 'Reingreso', 'Especiales'],
                     datasets: [{
-                        data: [65, 15, 12, 8],
+                        data: [65, 20, 10, 5],
                         backgroundColor: [
-                            '#292d6b', // Color índigo para estudiantes
-                            'rgba(255, 99, 132, 0.8)',
-                            'rgba(255, 206, 86, 0.8)',
-                            'rgba(75, 192, 192, 0.8)'
+                            '#292d6b', // Color índigo para estudiantes regulares
+                            'rgba(46, 204, 113, 0.8)', // Verde para nuevo ingreso
+                            'rgba(52, 152, 219, 0.8)', // Azul para reingreso
+                            'rgba(155, 89, 182, 0.8)' // Morado para especiales
                         ],
                         borderColor: [
-                            '#292d6b', // Color índigo para estudiantes
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
+                            '#292d6b',
+                            'rgba(46, 204, 113, 1)',
+                            'rgba(52, 152, 219, 1)',
+                            'rgba(155, 89, 182, 1)'
                         ],
                         borderWidth: 1
                     }]
@@ -413,31 +367,124 @@
                     plugins: {
                         legend: {
                             position: 'right',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    let value = context.raw || 0;
+                                    let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    let percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${percentage}% (${value} estudiantes)`;
+                                }
+                            }
                         }
                     }
                 }
             });
 
-            // Gráfico de accesos por hora
+            // Gráfico de accesos por hora (mejorado)
             const accessHoursCtx = document.getElementById('accessHoursChart').getContext('2d');
             const accessHoursChart = new Chart(accessHoursCtx, {
                 type: 'bar',
                 data: {
                     labels: ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM'],
                     datasets: [{
-                        label: 'Cantidad de Accesos',
-                        data: [5, 15, 35, 42, 25, 30, 45, 40, 35, 30, 38, 32, 20, 10, 5],
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        label: 'Entradas',
+                        data: [5, 45, 35, 25, 20, 30, 45, 15, 35, 30, 25, 20, 15, 10, 5],
+                        backgroundColor: 'rgba(52, 152, 219, 0.7)',
+                        borderColor: 'rgba(52, 152, 219, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }, {
+                        label: 'Salidas',
+                        data: [2, 5, 15, 20, 15, 25, 40, 40, 20, 25, 30, 35, 25, 15, 8],
+                        backgroundColor: 'rgba(231, 76, 60, 0.7)',
+                        borderColor: 'rgba(231, 76, 60, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Hora del Día'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Cantidad de Estudiantes'
+                            },
+                            grid: {
+                                color: 'rgba(200, 200, 200, 0.2)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Gráfico de distribución por carreras
+            const careerDistributionCtx = document.getElementById('careerDistributionChart').getContext('2d');
+            const careerDistributionChart = new Chart(careerDistributionCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Administración', 'Informática', 'Mercadeo', 'Contaduría', 'Turismo', 'Otras'],
+                    datasets: [{
+                        data: [30, 25, 15, 20, 5, 5],
+                        backgroundColor: [
+                            'rgba(52, 152, 219, 0.8)', // Azul
+                            'rgba(46, 204, 113, 0.8)', // Verde
+                            'rgba(155, 89, 182, 0.8)', // Morado
+                            'rgba(241, 196, 15, 0.8)', // Amarillo
+                            'rgba(230, 126, 34, 0.8)', // Naranja
+                            'rgba(149, 165, 166, 0.8)'  // Gris
+                        ],
+                        borderColor: [
+                            'rgba(52, 152, 219, 1)',
+                            'rgba(46, 204, 113, 1)',
+                            'rgba(155, 89, 182, 1)',
+                            'rgba(241, 196, 15, 1)',
+                            'rgba(230, 126, 34, 1)',
+                            'rgba(149, 165, 166, 1)'
+                        ],
                         borderWidth: 1
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    let value = context.raw || 0;
+                                    let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    let percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${percentage}% (${value}%)`;
+                                }
+                            }
                         }
                     }
                 }

@@ -11,14 +11,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function openMenu() {
         mobileMenuContainer.classList.add('open');
         mobileMenuOverlay.classList.add('open');
-        console.log('Menú abierto');
     }
 
     // Función para cerrar el menú
     function closeMenu() {
         mobileMenuContainer.classList.remove('open');
         mobileMenuOverlay.classList.remove('open');
-        console.log('Menú cerrado');
     }
 
     // Eventos para cerrar el menú
