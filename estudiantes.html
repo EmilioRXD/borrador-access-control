@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Estudiantes</title>
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/estudiantes.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -132,14 +133,60 @@
         </div>
 
         <div class="accordion-container">
+            <!-- Barra de búsqueda y filtros avanzados -->
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <i class='bx bx-search'></i>
+                    <input type="text" id="student-search" placeholder="Buscar por nombre, cédula o carrera..." class="search-input">
+                </div>
+                <button id="advanced-filters-toggle" class="advanced-filters-btn">
+                    <i class='bx bx-filter-alt'></i> Filtros
+                </button>
+            </div>
+            
+            <!-- Panel de filtros avanzados (oculto por defecto) -->
+            <div id="advanced-filters-panel" class="advanced-filters-panel">
+                <div class="filter-group">
+                    <h4>Carrera</h4>
+                    <div class="filter-options">
+                        <label><input type="checkbox" value="all" checked> Todos</label>
+                        <label><input type="checkbox" value="informatica"> Informática</label>
+                        <label><input type="checkbox" value="civil"> Civil</label>
+                        <label><input type="checkbox" value="arquitectura"> Arquitectura</label>
+                        <label><input type="checkbox" value="medicina"> Medicina</label>
+                        <label><input type="checkbox" value="derecho"> Derecho</label>
+                        <label><input type="checkbox" value="otros"> Otros</label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h4>Estado de pago</h4>
+                    <div class="filter-options">
+                        <label><input type="checkbox" value="all" checked> Todos</label>
+                        <label><input type="checkbox" value="pagado"> Pagado</label>
+                        <label><input type="checkbox" value="pendiente"> Pendiente</label>
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button id="apply-filters" class="apply-filters-btn">Aplicar</button>
+                    <button id="reset-filters" class="reset-filters-btn">Restablecer</button>
+                </div>
+            </div>
+            
+            <!-- Filtros rápidos (chips) -->
             <div class="accordion-filters">
                 <button class="filter-button active">Todos</button>
                 <button class="filter-button">Informática</button>
                 <button class="filter-button">Civil</button>
                 <button class="filter-button">Otros</button>
+                <button class="filter-button payment-pending">Pagos Pendientes</button>
+            </div>
+            
+            <!-- Contador de resultados -->
+            <div class="results-counter">
+                <span id="students-count">4</span> estudiantes encontrados
             </div>
 
-            <div class="accordion">
+            <div class="accordion" id="students-container">
                 <div class="accordion-item">
                     <div class="accordion-header">
                         <div class="accordion-title">
@@ -172,7 +219,7 @@
                     </div>
                 </div>
 
-                <div class="accordion-item">
+                <div class="accordion-item payment-pending">
                     <div class="accordion-header">
                         <div class="accordion-title">
                             <span class="user-name">María González</span>
@@ -199,6 +246,10 @@
                             <div class="user-data-item">
                                 <div class="data-label">Carrera:</div>
                                 <div class="data-value">Ingeniería Civil</div>
+                            </div>
+                            <div class="user-data-item">
+                                <div class="data-label">Estado de pago:</div>
+                                <div class="data-value payment-text">Pendiente - Acceso temporal</div>
                             </div>
                         </div>
                     </div>
@@ -300,50 +351,38 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Paginación -->
+            <div class="pagination-container">
+                <div class="pagination-info">
+                    <span>Mostrando <span id="page-start">1</span>-<span id="page-end">4</span> de <span id="total-students">4</span></span>
+                </div>
+                <div class="pagination-controls">
+                    <button id="prev-page" class="pagination-btn" disabled>
+                        <i class='bx bx-chevron-left'></i>
+                    </button>
+                    <div class="pagination-pages" id="pagination-pages">
+                        <button class="page-number active">1</button>
+                    </div>
+                    <button id="next-page" class="pagination-btn" disabled>
+                        <i class='bx bx-chevron-right'></i>
+                    </button>
+                </div>
+                <div class="items-per-page">
+                    <label for="per-page-select">Por página:</label>
+                    <select id="per-page-select">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </section>
 
     <script src="menu.js"></script>
-    <script>
-        // Acordeón
-        document.querySelectorAll('.accordion-toggle').forEach(button => {
-            button.addEventListener('click', () => {
-                const accordionItem = button.closest('.accordion-item');
-
-                // Cerrar otros items
-                document.querySelectorAll('.accordion-item').forEach(item => {
-                    if (item !== accordionItem) {
-                        item.classList.remove('active');
-                        const otherContent = item.querySelector('.accordion-content');
-                        otherContent.style.maxHeight = null;
-                        item.querySelector('.accordion-toggle').innerHTML = '<i class="bx bx-chevron-down"></i>';
-                    }
-                });
-
-                // Abrir/cerrar el item actual
-                accordionItem.classList.toggle('active');
-                const content = accordionItem.querySelector('.accordion-content');
-
-                if (accordionItem.classList.contains('active')) {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    button.innerHTML = '<i class="bx bx-chevron-up"></i>';
-                } else {
-                    content.style.maxHeight = null;
-                    button.innerHTML = '<i class="bx bx-chevron-down"></i>';
-                }
-            });
-        });
-
-        // Filtros (solo para demostración)
-        document.querySelectorAll('.filter-button').forEach(button => {
-            button.addEventListener('click', () => {
-                document.querySelectorAll('.filter-button').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                button.classList.add('active');
-            });
-        });
-    </script>
+    <script src="js/estudiantes.js"></script>
 </body>
 
 </html>

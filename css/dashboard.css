@@ -184,7 +184,7 @@
 }
 
 /* Estado de pago pendiente */
-.payment-pending {
+/* .payment-pending {
   background-color: var(--color-pending-light);
   color: var(--color-pending);
   padding: 4px 8px;
@@ -203,7 +203,7 @@
   border-radius: var(--border-radius-circle);
   background-color: var(--color-pending);
   margin-right: 5px;
-}
+} */
 
 /* Responsive adjustments */
 @media (max-width: 992px) {
