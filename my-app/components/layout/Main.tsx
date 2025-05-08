@@ -138,10 +138,10 @@ function Main() {
               tooltip: {
                 callbacks: {
                   label: function(context) {
-                    let label = context.label || '';
-                    let value = context.raw || 0;
-                    let total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
-                    let percentage = Math.round((Number(value) / total) * 100);
+                    const label = context.label || '';
+                    const value = context.raw || 0;
+                    const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+                    const percentage = Math.round((Number(value) / total) * 100);
                     return `${label}: ${percentage}% (${value} estudiantes)`;
                   }
                 }
@@ -251,10 +251,10 @@ function Main() {
               tooltip: {
                 callbacks: {
                   label: function(context) {
-                    let label = context.label || '';
-                    let value = context.raw || 0;
-                    let total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
-                    let percentage = Math.round((Number(value) / total) * 100);
+                    const label = context.label || '';
+                    const value = context.raw || 0;
+                    const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+                    const percentage = Math.round((Number(value) / total) * 100);
                     return `${label}: ${percentage}% (${value}%)`;
                   }
                 }
