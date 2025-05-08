@@ -89,7 +89,7 @@ const studentsContainer = document.getElementById('students-container');
 const searchInput = document.getElementById('student-search');
 const advancedFiltersToggle = document.getElementById('advanced-filters-toggle');
 const advancedFiltersPanel = document.getElementById('advanced-filters-panel');
-const applyFiltersBtn = document.getElementById('apply-filters');
+// Ya no se usa el botón de aplicar filtros
 const resetFiltersBtn = document.getElementById('reset-filters');
 const filterButtons = document.querySelectorAll('.filter-button');
 const perPageSelect = document.getElementById('per-page-select');
@@ -262,36 +262,36 @@ function applyFilters() {
     // Obtener valores de los filtros
     const searchTerm = searchInput.value.toLowerCase().trim();
     
-    // Inicializar filtros con valores por defecto
-    let carreraFilter = 'all';
-    let estadoPagoFilter = 'all';
+    // Inicializar arrays para almacenar múltiples filtros
+    let carreraFilters = [];
+    let estadoPagoFilters = [];
     
     // Verificar si el panel de filtros avanzados está visible
     if (advancedFiltersPanel.classList.contains('active')) {
         // Obtener filtros de carrera seleccionados
         const carreraButtons = document.querySelectorAll('.filter-group:nth-child(1) .filter-button.active');
         if (carreraButtons.length > 0) {
-            // Si hay botones activos, procesar cada uno
+            // Procesar cada botón activo y agregar su valor al array de filtros
             carreraButtons.forEach(btn => {
-                const text = btn.textContent.trim();
                 const value = btn.getAttribute('data-value');
                 
-                if (value === 'informatica') carreraFilter = 'Ingeniería Informática';
-                else if (value === 'civil') carreraFilter = 'Ingeniería Civil';
-                else if (value === 'arquitectura') carreraFilter = 'Arquitectura';
-                else if (value === 'medicina') carreraFilter = 'Medicina';
-                else if (value === 'derecho') carreraFilter = 'Derecho';
-                else if (value === 'otros') carreraFilter = 'otros';
+                if (value === 'informatica') carreraFilters.push('Ingeniería Informática');
+                else if (value === 'civil') carreraFilters.push('Ingeniería Civil');
+                else if (value === 'arquitectura') carreraFilters.push('Arquitectura');
+                else if (value === 'medicina') carreraFilters.push('Medicina');
+                else if (value === 'derecho') carreraFilters.push('Derecho');
+                else if (value === 'otros') carreraFilters.push('otros');
             });
         }
         
         // Obtener filtros de estado de pago seleccionados
         const pagoButtons = document.querySelectorAll('.filter-group:nth-child(2) .filter-button.active');
         if (pagoButtons.length > 0) {
+            // Procesar cada botón activo y agregar su valor al array de filtros
             pagoButtons.forEach(btn => {
                 const value = btn.getAttribute('data-value');
-                if (value === 'pendiente') estadoPagoFilter = 'pendiente';
-                else if (value === 'pagado') estadoPagoFilter = 'pagado';
+                if (value === 'pendiente') estadoPagoFilters.push('pendiente');
+                else if (value === 'pagado') estadoPagoFilters.push('pagado');
             });
         }
     }
@@ -299,8 +299,8 @@ function applyFilters() {
     // Actualizar filtros activos
     activeFilters = {
         search: searchTerm,
-        carrera: carreraFilter,
-        estadoPago: estadoPagoFilter
+        carreraFilters: carreraFilters,
+        estadoPagoFilters: estadoPagoFilters
     };
     
     // Aplicar filtros
@@ -313,19 +313,32 @@ function applyFilters() {
             student.carrera.toLowerCase().includes(searchTerm);
         
         // Filtro de carrera
-        let matchesCarrera = carreraFilter === 'all';
+        let matchesCarrera = carreraFilters.length === 0; // Si no hay filtros, se muestran todos
+        
         if (!matchesCarrera) {
-            if (carreraFilter === 'otros') {
-                // Para "otros", mostrar carreras que no son las principales
-                const carrerasPrincipales = ['Ingeniería Informática', 'Ingeniería Civil', 'Arquitectura', 'Medicina', 'Derecho'];
-                matchesCarrera = !carrerasPrincipales.includes(student.carrera);
-            } else {
-                matchesCarrera = student.carrera === carreraFilter;
+            // Verificar si alguno de los filtros seleccionados coincide
+            for (const filter of carreraFilters) {
+                if (filter === 'otros') {
+                    // Para "otros", mostrar carreras que no son las principales
+                    const carrerasPrincipales = ['Ingeniería Informática', 'Ingeniería Civil', 'Arquitectura', 'Medicina', 'Derecho'];
+                    if (!carrerasPrincipales.includes(student.carrera)) {
+                        matchesCarrera = true;
+                        break;
+                    }
+                } else if (student.carrera === filter) {
+                    matchesCarrera = true;
+                    break;
+                }
             }
         }
         
         // Filtro de estado de pago
-        const matchesEstadoPago = estadoPagoFilter === 'all' || student.estadoPago === estadoPagoFilter;
+        let matchesEstadoPago = estadoPagoFilters.length === 0; // Si no hay filtros, se muestran todos
+        
+        if (!matchesEstadoPago) {
+            // Verificar si alguno de los filtros seleccionados coincide
+            matchesEstadoPago = estadoPagoFilters.includes(student.estadoPago);
+        }
         
         return matchesSearch && matchesCarrera && matchesEstadoPago;
     });
@@ -350,8 +363,8 @@ function resetFilters() {
     // Aplicar filtros restablecidos
     activeFilters = {
         search: '',
-        carrera: 'all',
-        estadoPago: 'all'
+        carreraFilters: [],
+        estadoPagoFilters: []
     };
     
     filteredStudents = [...allStudents];
@@ -425,10 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
         advancedFiltersPanel.classList.toggle('active');
     });
     
-    applyFiltersBtn.addEventListener('click', () => {
-        applyFilters();
-        advancedFiltersPanel.classList.remove('active');
-    });
+    // Los filtros se aplican automáticamente al hacer clic en cada botón
     
     resetFiltersBtn.addEventListener('click', () => {
         resetFilters();
