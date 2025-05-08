@@ -10,7 +10,6 @@
   background-color: var(--color-bg-primary);
   border-radius: var(--border-radius-lg);
   box-shadow: 0 5px 10px var(--color-shadow);
-  margin: var(--spacing-lg);
 }
 
 .accordion-filters {
