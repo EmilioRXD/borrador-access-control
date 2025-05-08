@@ -262,43 +262,37 @@ function applyFilters() {
     // Obtener valores de los filtros
     const searchTerm = searchInput.value.toLowerCase().trim();
     
-    // Obtener filtro de carrera seleccionado
+    // Inicializar filtros con valores por defecto
     let carreraFilter = 'all';
-    document.querySelectorAll('.filter-button').forEach(btn => {
-        if (btn.classList.contains('active')) {
-            const text = btn.textContent.trim();
-            if (text === 'Todos') carreraFilter = 'all';
-            else if (text === 'Informática') carreraFilter = 'Ingeniería Informática';
-            else if (text === 'Civil') carreraFilter = 'Ingeniería Civil';
-            else if (text === 'Pagos Pendientes') carreraFilter = 'all'; // Este es un caso especial
-        }
-    });
-    
-    // Obtener estado de pago desde botones de filtro
     let estadoPagoFilter = 'all';
-    document.querySelectorAll('.filter-button').forEach(btn => {
-        if (btn.classList.contains('active') && btn.textContent.trim() === 'Pagos Pendientes') {
-            estadoPagoFilter = 'pendiente';
-        }
-    });
     
-    // Obtener filtros avanzados si están visibles
-    if (advancedFiltersPanel.style.display === 'block') {
-        // Carrera
-        const carreraCheckboxes = document.querySelectorAll('.filter-group:nth-child(1) input[type="checkbox"]:checked');
-        if (carreraCheckboxes.length === 1 && carreraCheckboxes[0].value !== 'all') {
-            const value = carreraCheckboxes[0].value;
-            if (value === 'informatica') carreraFilter = 'Ingeniería Informática';
-            else if (value === 'civil') carreraFilter = 'Ingeniería Civil';
-            else if (value === 'arquitectura') carreraFilter = 'Arquitectura';
-            else if (value === 'medicina') carreraFilter = 'Medicina';
-            else if (value === 'derecho') carreraFilter = 'Derecho';
+    // Verificar si el panel de filtros avanzados está visible
+    if (advancedFiltersPanel.classList.contains('active')) {
+        // Obtener filtros de carrera seleccionados
+        const carreraButtons = document.querySelectorAll('.filter-group:nth-child(1) .filter-button.active');
+        if (carreraButtons.length > 0) {
+            // Si hay botones activos, procesar cada uno
+            carreraButtons.forEach(btn => {
+                const text = btn.textContent.trim();
+                const value = btn.getAttribute('data-value');
+                
+                if (value === 'informatica') carreraFilter = 'Ingeniería Informática';
+                else if (value === 'civil') carreraFilter = 'Ingeniería Civil';
+                else if (value === 'arquitectura') carreraFilter = 'Arquitectura';
+                else if (value === 'medicina') carreraFilter = 'Medicina';
+                else if (value === 'derecho') carreraFilter = 'Derecho';
+                else if (value === 'otros') carreraFilter = 'otros';
+            });
         }
         
-        // Estado de pago
-        const pagoCheckboxes = document.querySelectorAll('.filter-group:nth-child(2) input[type="checkbox"]:checked');
-        if (pagoCheckboxes.length === 1 && pagoCheckboxes[0].value !== 'all') {
-            estadoPagoFilter = pagoCheckboxes[0].value;
+        // Obtener filtros de estado de pago seleccionados
+        const pagoButtons = document.querySelectorAll('.filter-group:nth-child(2) .filter-button.active');
+        if (pagoButtons.length > 0) {
+            pagoButtons.forEach(btn => {
+                const value = btn.getAttribute('data-value');
+                if (value === 'pendiente') estadoPagoFilter = 'pendiente';
+                else if (value === 'pagado') estadoPagoFilter = 'pagado';
+            });
         }
     }
     
@@ -319,7 +313,16 @@ function applyFilters() {
             student.carrera.toLowerCase().includes(searchTerm);
         
         // Filtro de carrera
-        const matchesCarrera = carreraFilter === 'all' || student.carrera === carreraFilter;
+        let matchesCarrera = carreraFilter === 'all';
+        if (!matchesCarrera) {
+            if (carreraFilter === 'otros') {
+                // Para "otros", mostrar carreras que no son las principales
+                const carrerasPrincipales = ['Ingeniería Informática', 'Ingeniería Civil', 'Arquitectura', 'Medicina', 'Derecho'];
+                matchesCarrera = !carrerasPrincipales.includes(student.carrera);
+            } else {
+                matchesCarrera = student.carrera === carreraFilter;
+            }
+        }
         
         // Filtro de estado de pago
         const matchesEstadoPago = estadoPagoFilter === 'all' || student.estadoPago === estadoPagoFilter;
@@ -339,14 +342,9 @@ function resetFilters() {
     // Limpiar campo de búsqueda
     searchInput.value = '';
     
-    // Restablecer filtros rápidos
-    document.querySelectorAll('.filter-button').forEach((btn, index) => {
-        btn.classList.toggle('active', index === 0); // Activar solo "Todos"
-    });
-    
-    // Restablecer filtros avanzados
-    document.querySelectorAll('#advanced-filters-panel input[type="checkbox"]').forEach(checkbox => {
-        checkbox.checked = checkbox.value === 'all';
+    // Desactivar todos los botones de filtro en el panel avanzado
+    document.querySelectorAll('#advanced-filters-panel .filter-button').forEach(button => {
+        button.classList.remove('active');
     });
     
     // Aplicar filtros restablecidos
@@ -403,25 +401,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
     
-    // Eventos de filtros rápidos
-    filterButtons.forEach(button => {
+    // Eventos para los botones de filtro en el panel avanzado
+    document.querySelectorAll('#advanced-filters-panel .filter-button').forEach(button => {
         button.addEventListener('click', () => {
-            // Si es el botón de "Todos", desactivar los demás
-            if (button.textContent.trim() === 'Todos') {
-                filterButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                button.classList.add('active');
+            // Si está en el mismo grupo de filtros, alternar entre ellos
+            const filterGroup = button.closest('.filter-group');
+            const isInSameGroup = (btn) => btn.closest('.filter-group') === filterGroup;
+            
+            // Si el botón ya está activo, desactivarlo
+            if (button.classList.contains('active')) {
+                button.classList.remove('active');
             } else {
-                // Desactivar el botón "Todos"
-                filterButtons.forEach(btn => {
-                    if (btn.textContent.trim() === 'Todos') {
-                        btn.classList.remove('active');
-                    }
-                });
-                
-                // Alternar el estado del botón actual
-                button.classList.toggle('active');
+                // Activar este botón
+                button.classList.add('active');
             }
             
             applyFilters();
@@ -430,17 +422,17 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Eventos de filtros avanzados
     advancedFiltersToggle.addEventListener('click', () => {
-        advancedFiltersPanel.style.display = advancedFiltersPanel.style.display === 'block' ? 'none' : 'block';
+        advancedFiltersPanel.classList.toggle('active');
     });
     
     applyFiltersBtn.addEventListener('click', () => {
         applyFilters();
-        advancedFiltersPanel.style.display = 'none';
+        advancedFiltersPanel.classList.remove('active');
     });
     
     resetFiltersBtn.addEventListener('click', () => {
         resetFilters();
-        advancedFiltersPanel.style.display = 'none';
+        advancedFiltersPanel.classList.remove('active');
     });
     
     // Eventos de paginación

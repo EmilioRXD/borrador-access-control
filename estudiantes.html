@@ -148,22 +148,20 @@
             <div id="advanced-filters-panel" class="advanced-filters-panel">
                 <div class="filter-group">
                     <h4>Carrera</h4>
-                    <div class="filter-options">
-                        <label><input type="checkbox" value="all" checked> Todos</label>
-                        <label><input type="checkbox" value="informatica"> Informática</label>
-                        <label><input type="checkbox" value="civil"> Civil</label>
-                        <label><input type="checkbox" value="arquitectura"> Arquitectura</label>
-                        <label><input type="checkbox" value="medicina"> Medicina</label>
-                        <label><input type="checkbox" value="derecho"> Derecho</label>
-                        <label><input type="checkbox" value="otros"> Otros</label>
+                    <div class="filter-options accordion-filters">
+                        <button class="filter-button" data-value="informatica">Informática</button>
+                        <button class="filter-button" data-value="civil">Civil</button>
+                        <button class="filter-button" data-value="arquitectura">Arquitectura</button>
+                        <button class="filter-button" data-value="medicina">Medicina</button>
+                        <button class="filter-button" data-value="derecho">Derecho</button>
+                        <button class="filter-button" data-value="otros">Otros</button>
                     </div>
                 </div>
                 <div class="filter-group">
                     <h4>Estado de pago</h4>
-                    <div class="filter-options">
-                        <label><input type="checkbox" value="all" checked> Todos</label>
-                        <label><input type="checkbox" value="pagado"> Pagado</label>
-                        <label><input type="checkbox" value="pendiente"> Pendiente</label>
+                    <div class="filter-options accordion-filters">
+                        <button class="filter-button" data-value="pagado">Pagado</button>
+                        <button class="filter-button payment-pending" data-value="pendiente">Pagos Pendientes</button>
                     </div>
                 </div>
                 <div class="filter-actions">
@@ -172,14 +170,6 @@
                 </div>
             </div>
             
-            <!-- Filtros rápidos (chips) -->
-            <div class="accordion-filters">
-                <button class="filter-button active">Todos</button>
-                <button class="filter-button">Informática</button>
-                <button class="filter-button">Civil</button>
-                <button class="filter-button">Otros</button>
-                <button class="filter-button payment-pending">Pagos Pendientes</button>
-            </div>
             
             <!-- Contador de resultados -->
             <div class="results-counter">
