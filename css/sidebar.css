@@ -3,8 +3,6 @@
 * Estilos para el menú lateral del sistema de control de acceso
 */
 
-@import 'variables.css';
-
 .sidebar {
   position: fixed;
   left: 0;
