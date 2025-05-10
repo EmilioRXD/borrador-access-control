@@ -44,7 +44,6 @@
 }
 
 .accordion {
-  border-radius: var(--border-radius-md);
   overflow: hidden;
 }
 
@@ -82,7 +81,7 @@
   white-space: nowrap;
 }
 
-.user-ci {
+.user-date {
   font-weight: 400;
   font-size: var(--font-size-xs);
   overflow: hidden;

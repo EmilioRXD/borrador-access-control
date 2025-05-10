@@ -26,13 +26,18 @@
 .sidebar .logo-details {
   height: 60px;
   display: flex;
+  gap: var(--spacing-sm);
   align-items: center;
   position: relative;
 }
 
-.sidebar .logo-details .icon {
+.sidebar .logo-details .icon,
+.sidebar .logo-details .logo-img {
   opacity: 0;
   transition: var(--transition-medium);
+  height: 40px;
+  width: auto;
+  object-fit: contain;
 }
 
 .sidebar .logo-details .logo_name {
@@ -44,8 +49,10 @@
 }
 
 .sidebar:hover .logo-details .icon,
+.sidebar:hover .logo-details .logo-img,
 .sidebar:hover .logo-details .logo_name,
 .sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo-img,
 .sidebar.open .logo-details .logo_name {
   opacity: 1;
 }
@@ -162,7 +169,6 @@
 
 .sidebar li.profile {
   position: fixed;
-  height: 60px;
   width: 78px;
   left: 0;
   bottom: -8px;

@@ -1,6 +1,6 @@
 /* 
-* estudiantes.css
-* Estilos adicionales para la página de estudiantes del sistema de control de acceso
+* registros.css
+* Estilos adicionales para la página de registros del sistema de control de acceso
 */
 
 @import 'variables.css';
@@ -163,6 +163,7 @@
     font-size: var(--font-size-xs);
     cursor: pointer;
     transition: all var(--transition-fast);
+    border: 1px solid var(--color-bg-tertiary);
 }
 
 .filter-button.active {
@@ -201,9 +202,35 @@
     border-radius: var(--border-radius-xl);
 }
 
-/* Estos estilos ya están definidos en accordion.css, solo añadimos lo específico */
-.payment-text {
+/* Estilos específicos para registro de acceso */
+.payment-pending {
     color: var(--color-pending);
+}
+
+.access-type {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--font-size-xs);
+    padding: 3px var(--spacing-xs);
+    border-radius: var(--border-radius-xl);
+    margin-left: var(--spacing-sm);
+    background-color: var(--color-bg-tertiary);
+}
+
+/* Estilos según tipo de acceso */
+.access-type.entrada {
+    background-color: var(--color-success);
+    color: var(--color-text-light);
+}
+
+.access-type.salida {
+    background-color: var(--color-info);
+    color: var(--color-text-light);
+}
+
+.access-type.denegado {
+    background-color: var(--color-danger);
+    color: var(--color-text-light);
 }
 
 /* Paginación */
@@ -339,7 +366,7 @@
 }
 
 /* Responsive */
-@media (max-width: var(--breakpoint-md)) {
+@media (max-width: 768px) {
     .search-container {
         flex-direction: column;
         align-items: stretch;
