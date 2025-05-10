@@ -133,13 +133,45 @@ function renderRegistros() {
             const tipoAccesoClass = registro.tipoAcceso;
             const estadoPagoClass = (registro.estado === 'temporal' || registro.estado === 'deuda') ? 'payment-pending' : '';
             
+            // Determinar el tipo de contenedor de estado según el tipo de acceso
+            let statusContainerClass = '';
+            let statusIndicatorClass = '';
+            let statusTitle = '';
+            let statusText = '';
+            
+            if (registro.tipoAcceso === 'entrada') {
+                statusContainerClass = 'status-entrada-container';
+                statusIndicatorClass = 'status-entrada';
+                statusTitle = 'Registro de entrada al instituto';
+                statusText = 'Entrada';
+            } else if (registro.tipoAcceso === 'salida') {
+                statusContainerClass = 'status-salida-container';
+                statusIndicatorClass = 'status-salida';
+                statusTitle = 'Registro de salida del instituto';
+                statusText = 'Salida';
+            } else if (registro.tipoAcceso === 'denegado') {
+                statusContainerClass = 'status-denegado-container';
+                statusIndicatorClass = 'status-denegado';
+                statusTitle = 'Acceso denegado por falta de pago';
+                statusText = 'Denegado';
+                
+                // Si tiene deuda, mantenemos la clase payment-pending para el estilo de color naranja
+                if (registro.estado === 'temporal' || registro.estado === 'deuda') {
+                    registroItem.classList.add('payment-pending');
+                }
+            }
+
             registroItem.innerHTML = `
                 <div class="accordion-header">
                     <div class="accordion-title">
                         <span class="user-name">${registro.nombre} ${registro.apellido}</span>
-                        <span class="access-type ${tipoAccesoClass}">${formatTipoAcceso(registro.tipoAcceso)}: ${registro.hora}</span>
+                        <span class="user-date">${formatTipoAcceso(registro.tipoAcceso)}: ${registro.hora}</span>
                     </div>
                     <div class="accordion-actions">
+                        <div class="status-container ${statusContainerClass}" title="${statusTitle}">
+                            <span class="status-indicator ${statusIndicatorClass}"></span>
+                            <span>${statusText}</span>
+                        </div>
                         <button class="accordion-toggle"><i class='bx bx-chevron-down'></i></button>
                     </div>
                 </div>

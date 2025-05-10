@@ -233,6 +233,66 @@
     color: var(--color-text-light);
 }
 
+/* Estilos para los indicadores de estado */
+.status-container {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius-xl);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    margin-right: var(--spacing-sm);
+    white-space: nowrap;
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+/* Estilos para entrada */
+.status-entrada-container {
+    background-color: rgba(40, 199, 111, 0.15);
+    color: var(--color-success);
+}
+
+.status-indicator.status-entrada {
+    background-color: var(--color-success);
+}
+
+/* Estilos para salida */
+.status-salida-container {
+    background-color: rgba(225, 29, 72, 0.15);
+    color: var(--color-danger);
+}
+
+.status-indicator.status-salida {
+    background-color: var(--color-danger);
+}
+
+/* Estilos para denegado */
+.status-denegado-container {
+    background-color: rgba(225, 29, 72, 0.15);
+    color: var(--color-danger);
+}
+
+.status-indicator.status-denegado {
+    background-color: var(--color-danger);
+}
+
+/* Estilos para acceso temporal (pago pendiente) */
+.payment-pending .status-denegado-container {
+    background-color: rgba(255, 159, 67, 0.15);
+    color: var(--color-pending);
+}
+
+.payment-pending .status-indicator.status-denegado {
+    background-color: var(--color-pending);
+}
+
 /* Paginación */
 .pagination-container {
     display: flex;
